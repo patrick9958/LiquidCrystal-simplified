@@ -113,6 +113,12 @@ public:
    int return_button_pressed(bool exclude_none = false,
      bool lcd_print = false, bool serial_print = false);
 
+   /*
+    * reads and returns button check_button_pressed
+    */
+   int check_button_pressed(int analog_pin = 0, bool exclude_none = false,
+     bool lcd_print = false, bool serial_print = false); 
+
   // TODO: FINISH
   /*
    * user asked to input time through Serial.read()

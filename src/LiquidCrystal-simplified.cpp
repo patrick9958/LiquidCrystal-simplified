@@ -122,6 +122,11 @@ int LiquidCrystal::return_button_pressed(bool exclude_none,
   }
 }
 
+int read_and_return_button_pressed(int analog_pin, bool exclude_none,
+	bool lcd_print, bool serial_print) {
+
+	}
+
 // TODO: finish later but implement using much easier Arduino Time library
 // void LiquidCrystal::setTime(int cursor_x, int cursor_y, int hour, int minutes) {
 // 	else if(Serial.available()) {

@@ -1,5 +1,5 @@
-#ifndef LiquidCrystal_h
-#define LiquidCrystal_h
+#ifndef LiquidCrystal_simplified_h
+#define LiquidCrystal_simplified_h
 
 #include <inttypes.h>
 #include "Print.h"
@@ -42,8 +42,19 @@
 #define LCD_5x10DOTS 0x04
 #define LCD_5x8DOTS 0x00
 
+// used in button presses
+#define btnRIGHT  0
+#define btnUP     1
+#define btnDOWN   2
+#define btnLEFT   3
+#define btnSELECT 4
+#define btnNONE   5
+
 class LiquidCrystal : public Print {
 public:
+  // default ctor uses TinkerTech-owned LCD screen models
+  // assumes configuration on Arduino Uno's or compatible equivalent
+  LiquidCrystal();
   LiquidCrystal(uint8_t rs, uint8_t enable,
 		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
 		uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
@@ -58,7 +69,7 @@ public:
   void init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
 	    uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
 	    uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
-    
+
   void begin(uint8_t cols, uint8_t rows, uint8_t charsize = LCD_5x8DOTS);
 
   void clear();
@@ -79,10 +90,44 @@ public:
 
   void setRowOffsets(int row1, int row2, int row3, int row4);
   void createChar(uint8_t, uint8_t[]);
-  void setCursor(uint8_t, uint8_t); 
+  void setCursor(uint8_t, uint8_t);
   virtual size_t write(uint8_t);
   void command(uint8_t);
-  
+
+
+  /*
+  Added Library functions below
+  These methods below do not exist in regular LiquidCrystal library
+  ==============================================================================
+  */
+
+  // analog_pin on TinkerTech model LCDs are at pin 0, adjust if necessary
+  int read_LCD_buttons(int analog_pin = 0);
+
+  /*
+   * prints which button was pressed to LCD display at (0,0)
+   * by default LCD display stays empty unless lcd_print = true
+   * if exclude_none = true and lcd_print = true, LCD displays last pressed value
+   * if serial_print is true, also prints button pressed to serial_print
+   */
+   int print_button_pressed(int lcd_key = btnNONE, bool lcd_print = false,
+     bool serial_print = false, bool exclude_none = false);
+
+  // TODO: FINISH
+  /*
+   * user asked to input time through Serial.read()
+   * manual entry feature available w/ paramaters 3 and 4
+   * by default the time is displayed at (0,0)
+   * users can change this by changing the cursor_x and cursor_y
+   * i.e. cursor_x = 1 and cursor_y = 3 is effectivly setCursor(1,3);
+   */
+  // void LiquidCrystal::setTime(int cursor_x = 0, int cursor_y = 0,
+  //   int hour = 0, int minutes = 0);
+
+  /*
+  ==============================================================================
+  */
+
   using Print::write;
 private:
   void send(uint8_t, uint8_t);

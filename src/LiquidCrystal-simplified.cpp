@@ -79,7 +79,7 @@ int LiquidCrystal::return_button_pressed(bool exclude_none,
   {
     case btnRIGHT:
       {
-	      if(lcd_print) print("RIGHT ");
+	      if(lcd_print) print("RIGHT  ");
 				if(serial_print) Serial.println("RIGHT");
 	      return btnRIGHT;
       }

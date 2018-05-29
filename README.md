@@ -1,5 +1,4 @@
 # Liquid Crystal Simplified Library for Arduino
----
 
 This library allows an Arduino board to control LiquidCrystal displays (LCDs) based on the Hitachi HD44780 (or a compatible) chipset, which is found on most text-based LCDs.
 
@@ -25,7 +24,7 @@ Written by Patrick Neggie, 2018 <<patmn@umich.edu>>
    int print_button_pressed(int lcd_key = btnNONE, bool lcd_print = false,
      bool serial_print = false, bool exclude_none = false);
 ```
-##### Note:
+#### Note:
 This library was specifically tailored for these [LCD displays][display]. If you have that model or a similar display, the button reading functionality should work. This library was inspired by Mark Bramwell and his superb [tutorial][tutorial]. Please check it out his work if you would like to learn more.
 
 ### License

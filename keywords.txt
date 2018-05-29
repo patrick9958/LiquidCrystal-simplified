@@ -6,7 +6,7 @@
 # Datatypes (KEYWORD1)
 #######################################
 
-LiquidCrystal	KEYWORD1	LiquidCrystal
+LiquidCrystal_simplified	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
@@ -31,8 +31,9 @@ scrollDisplayLeft	KEYWORD2
 scrollDisplayRight	KEYWORD2
 createChar	KEYWORD2
 setRowOffsets	KEYWORD2
+read_LCD_buttons	KEYWORD2
+print_button_pressed	KEYWORD2
 
 #######################################
 # Constants (LITERAL1)
 #######################################
-

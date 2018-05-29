@@ -1,4 +1,4 @@
-#include "LiquidCrystal.h"
+#include "LiquidCrystal_simplified.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -71,61 +71,67 @@ int LiquidCrystal::read_LCD_buttons(int analog_pin) {
   return btnNONE;  // when all others fail, return this...
 }
 
-int LiquidCrystal::return_button_pressed(bool exclude_none,
-	bool lcd_print, bool serial_print) {
+int LiquidCrystal::print_button_pressed(int lcd_key, bool lcd_print,
+	bool serial_print, bool exclude_none) {
 
-	int lcd_key = 0;
+	static bool not_printed = true;
+
 	switch (lcd_key)               // depending on which button was pushed, we perform an action
   {
     case btnRIGHT:
       {
 	      if(lcd_print) print("RIGHT  ");
 				if(serial_print) Serial.println("RIGHT");
+				not_printed = true;
 	      return btnRIGHT;
       }
     case btnLEFT:
       {
 	      if(lcd_print) print("LEFT   ");
 				if(serial_print) Serial.println("LEFT");
+				not_printed = true;
 	      return btnLEFT;
       }
     case btnUP:
       {
 	      if(lcd_print) print("UP    ");
 				if(serial_print) Serial.println("UP");
+				not_printed = true;
 	      return btnUP;
       }
     case btnDOWN:
       {
 	      if(lcd_print) print("DOWN  ");
 				if(serial_print) Serial.println("DOWN");
+				not_printed = true;
 	      return btnDOWN;
       }
     case btnSELECT:
       {
 	      if(lcd_print) print("SELECT");
 				if(serial_print) Serial.println("SELECT");
+				not_printed = true;
 	      return btnSELECT;
       }
     case btnNONE:
 	    {
 				if(!exclude_none) {
 					if(lcd_print) print("NONE  ");
-					if(serial_print) Serial.println("NONE");
-				}
+					if(serial_print && not_printed) {
+						Serial.println("NONE");
+						not_printed = false;
+					}
 				else {
-					if(lcd_print) print("");
-					if(serial_print) Serial.println();
+					if(serial_print && not_printed) {
+						Serial.println();
+						not_printed = false;
+					}
 				}
 				return btnNONE;
 	    }
+		}
   }
 }
-
-int read_and_return_button_pressed(int analog_pin, bool exclude_none,
-	bool lcd_print, bool serial_print) {
-
-	}
 
 // TODO: finish later but implement using much easier Arduino Time library
 // void LiquidCrystal::setTime(int cursor_x, int cursor_y, int hour, int minutes) {

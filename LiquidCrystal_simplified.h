@@ -1,5 +1,5 @@
-#ifndef LiquidCrystal_h
-#define LiquidCrystal_h
+#ifndef LiquidCrystal_simplified_h
+#define LiquidCrystal_simplified_h
 
 #include <inttypes.h>
 #include "Print.h"
@@ -110,14 +110,8 @@ public:
    * set exclude_none to true if you don't want NONE to print when nothing is pressed
    * if serial_print is true, also prints button pressed to serial_print
    */
-   int return_button_pressed(bool exclude_none = false,
-     bool lcd_print = false, bool serial_print = false);
-
-   /*
-    * reads and returns button check_button_pressed
-    */
-   int check_button_pressed(int analog_pin = 0, bool exclude_none = false,
-     bool lcd_print = false, bool serial_print = false); 
+   int print_button_pressed(int lcd_key = btnNONE, bool lcd_print = false,
+     bool serial_print = false,bool exclude_none = false);
 
   // TODO: FINISH
   /*

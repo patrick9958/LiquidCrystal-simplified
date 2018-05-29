@@ -1,4 +1,5 @@
 # Liquid Crystal Simplified Library for Arduino
+---
 
 This library allows an Arduino board to control LiquidCrystal displays (LCDs) based on the Hitachi HD44780 (or a compatible) chipset, which is found on most text-based LCDs.
 
@@ -6,6 +7,8 @@ This library allows an Arduino board to control LiquidCrystal displays (LCDs) ba
 
 For more information about this library please visit us at
 http://www.arduino.cc/en/Reference/LiquidCrystal
+
+Written by Patrick Neggie, 2018 <<patmn@umich.edu>>
 
 ### New Functions
 ```c
@@ -22,6 +25,8 @@ http://www.arduino.cc/en/Reference/LiquidCrystal
    int print_button_pressed(int lcd_key = btnNONE, bool lcd_print = false,
      bool serial_print = false, bool exclude_none = false);
 ```
+##### Note:
+This library was specifically tailored for these [LCD displays][display]. If you have that model or a similar display, the button reading functionality should work. This library was inspired by Mark Bramwell and his superb [tutorial][tutorial]. Please check it out his work if you would like to learn more.
 
 ### License
 Copyright (C) 2006-2008 Hans-Christoph Steiner. All rights reserved.
@@ -40,3 +45,6 @@ Lesser General Public License for more details.
 You should have received a copy of the GNU Lesser General Public
 License along with this library; if not, write to the Free Software
 Foundation, Inc., 51 Franklin St, Fifth Floor, Boston, MA 02110-1301 USA
+
+[tutorial]: https://www.dfrobot.com/wiki/index.php/Arduino_LCD_KeyPad_Shield_(SKU:_DFR0009)
+[display]: https://www.dfrobot.com/product-51.html

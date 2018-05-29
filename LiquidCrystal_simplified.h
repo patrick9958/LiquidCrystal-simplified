@@ -107,11 +107,11 @@ public:
   /*
    * prints which button was pressed to LCD display at (0,0)
    * by default LCD display stays empty unless lcd_print = true
-   * set exclude_none to true if you don't want NONE to print when nothing is pressed
+   * if exclude_none = true and lcd_print = true, LCD displays last pressed value
    * if serial_print is true, also prints button pressed to serial_print
    */
    int print_button_pressed(int lcd_key = btnNONE, bool lcd_print = false,
-     bool serial_print = false,bool exclude_none = false);
+     bool serial_print = false, bool exclude_none = false);
 
   // TODO: FINISH
   /*

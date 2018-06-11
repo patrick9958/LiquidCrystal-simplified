@@ -1,6 +1,6 @@
-#include <LiquidCrystal_simplified.h>
+#include <TT_LiquidCrystal.h>
 
-LiquidCrystal lcd;
+TT_LiquidCrystal lcd;
 
 int lcd_key = 0;
 

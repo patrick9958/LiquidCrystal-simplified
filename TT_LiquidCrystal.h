@@ -1,5 +1,5 @@
-#ifndef LiquidCrystal_simplified_h
-#define LiquidCrystal_simplified_h
+#ifndef TT_LiquidCrystal_h
+#define TT_LiquidCrystal_h
 
 #include <inttypes.h>
 #include "Print.h"
@@ -50,20 +50,20 @@
 #define btnSELECT 4
 #define btnNONE   5
 
-class LiquidCrystal : public Print {
+class TT_LiquidCrystal : public Print {
 public:
   // default ctor uses TinkerTech-owned LCD screen models
   // assumes configuration on Arduino Uno's or compatible equivalent
-  LiquidCrystal();
-  LiquidCrystal(uint8_t rs, uint8_t enable,
+  TT_LiquidCrystal();
+  TT_LiquidCrystal(uint8_t rs, uint8_t enable,
 		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
 		uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
-  LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+  TT_LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
 		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
 		uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7);
-  LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+  TT_LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
 		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
-  LiquidCrystal(uint8_t rs, uint8_t enable,
+  TT_LiquidCrystal(uint8_t rs, uint8_t enable,
 		uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3);
 
   void init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,

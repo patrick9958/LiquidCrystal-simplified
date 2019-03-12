@@ -1,4 +1,4 @@
-#include "LiquidCrystal_simplified.h"
+#include "TT_LiquidCrystal.h"
 
 #include <stdio.h>
 #include <string.h>
@@ -22,29 +22,29 @@
 //
 // Note, however, that resetting the Arduino doesn't reset the LCD, so we
 // can't assume that its in that state when a sketch starts (and the
-// LiquidCrystal constructor is called).
+// TT_LiquidCrystal constructor is called).
 
-LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+TT_LiquidCrystal::TT_LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
 			     uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
 			     uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
   init(0, rs, rw, enable, d0, d1, d2, d3, d4, d5, d6, d7);
 }
 
-LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t enable,
+TT_LiquidCrystal::TT_LiquidCrystal(uint8_t rs, uint8_t enable,
 			     uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
 			     uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
   init(0, rs, 255, enable, d0, d1, d2, d3, d4, d5, d6, d7);
 }
 
-LiquidCrystal::LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
+TT_LiquidCrystal::TT_LiquidCrystal(uint8_t rs, uint8_t rw, uint8_t enable,
 			     uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
 {
   init(1, rs, rw, enable, d0, d1, d2, d3, 0, 0, 0, 0);
 }
 
-LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
+TT_LiquidCrystal::TT_LiquidCrystal(uint8_t rs,  uint8_t enable,
 			     uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3)
 {
   init(1, rs, 255, enable, d0, d1, d2, d3, 0, 0, 0, 0);
@@ -52,12 +52,12 @@ LiquidCrystal::LiquidCrystal(uint8_t rs,  uint8_t enable,
 
 // default ctor uses TinkerTech-owned LCD screen models
 // assumes configuration on Arduino Uno's or compatible equivalent
-LiquidCrystal::LiquidCrystal()
+TT_LiquidCrystal::TT_LiquidCrystal()
 {
 	init(1, 8, 255, 9, 4, 5, 6, 7, 0, 0, 0, 0);
 }
 
-int LiquidCrystal::read_LCD_buttons(int analog_pin) {
+int TT_LiquidCrystal::read_LCD_buttons(int analog_pin) {
 	int adc_key_in = analogRead(analog_pin);      // read the value from the sensor
   // my buttons when read are centered at these values: 0, 144, 329, 504, 741
   // we add approx 50 to those values and check to see if we are close
@@ -71,7 +71,7 @@ int LiquidCrystal::read_LCD_buttons(int analog_pin) {
   return btnNONE;  // when all others fail, return this...
 }
 
-int LiquidCrystal::print_button_pressed(int lcd_key, bool lcd_print,
+int TT_LiquidCrystal::print_button_pressed(int lcd_key, bool lcd_print,
 	bool serial_print, bool exclude_none) {
 
 	static bool not_printed = true;
@@ -134,7 +134,7 @@ int LiquidCrystal::print_button_pressed(int lcd_key, bool lcd_print,
 }
 
 // TODO: finish later but implement using much easier Arduino Time library
-// void LiquidCrystal::setTime(int cursor_x, int cursor_y, int hour, int minutes) {
+// void TT_LiquidCrystal::setTime(int cursor_x, int cursor_y, int hour, int minutes) {
 // 	else if(Serial.available()) {
 // 		Serial.println("Hour: ");
 // 		hour = Serial.read();
@@ -221,7 +221,7 @@ int LiquidCrystal::print_button_pressed(int lcd_key, bool lcd_print,
 
 
 
-void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
+void TT_LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t enable,
 			 uint8_t d0, uint8_t d1, uint8_t d2, uint8_t d3,
 			 uint8_t d4, uint8_t d5, uint8_t d6, uint8_t d7)
 {
@@ -246,7 +246,7 @@ void LiquidCrystal::init(uint8_t fourbitmode, uint8_t rs, uint8_t rw, uint8_t en
   begin(16, 1);
 }
 
-void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
+void TT_LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
   if (lines > 1) {
     _displayfunction |= LCD_2LINE;
   }
@@ -335,7 +335,7 @@ void LiquidCrystal::begin(uint8_t cols, uint8_t lines, uint8_t dotsize) {
 
 }
 
-void LiquidCrystal::setRowOffsets(int row0, int row1, int row2, int row3)
+void TT_LiquidCrystal::setRowOffsets(int row0, int row1, int row2, int row3)
 {
   _row_offsets[0] = row0;
   _row_offsets[1] = row1;
@@ -344,19 +344,19 @@ void LiquidCrystal::setRowOffsets(int row0, int row1, int row2, int row3)
 }
 
 /********** high level commands, for the user! */
-void LiquidCrystal::clear()
+void TT_LiquidCrystal::clear()
 {
   command(LCD_CLEARDISPLAY);  // clear display, set cursor position to zero
   delayMicroseconds(2000);  // this command takes a long time!
 }
 
-void LiquidCrystal::home()
+void TT_LiquidCrystal::home()
 {
   command(LCD_RETURNHOME);  // set cursor position to zero
   delayMicroseconds(2000);  // this command takes a long time!
 }
 
-void LiquidCrystal::setCursor(uint8_t col, uint8_t row)
+void TT_LiquidCrystal::setCursor(uint8_t col, uint8_t row)
 {
   const size_t max_lines = sizeof(_row_offsets) / sizeof(*_row_offsets);
   if ( row >= max_lines ) {
@@ -370,70 +370,70 @@ void LiquidCrystal::setCursor(uint8_t col, uint8_t row)
 }
 
 // Turn the display on/off (quickly)
-void LiquidCrystal::noDisplay() {
+void TT_LiquidCrystal::noDisplay() {
   _displaycontrol &= ~LCD_DISPLAYON;
   command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
-void LiquidCrystal::display() {
+void TT_LiquidCrystal::display() {
   _displaycontrol |= LCD_DISPLAYON;
   command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
 
 // Turns the underline cursor on/off
-void LiquidCrystal::noCursor() {
+void TT_LiquidCrystal::noCursor() {
   _displaycontrol &= ~LCD_CURSORON;
   command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
-void LiquidCrystal::cursor() {
+void TT_LiquidCrystal::cursor() {
   _displaycontrol |= LCD_CURSORON;
   command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
 
 // Turn on and off the blinking cursor
-void LiquidCrystal::noBlink() {
+void TT_LiquidCrystal::noBlink() {
   _displaycontrol &= ~LCD_BLINKON;
   command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
-void LiquidCrystal::blink() {
+void TT_LiquidCrystal::blink() {
   _displaycontrol |= LCD_BLINKON;
   command(LCD_DISPLAYCONTROL | _displaycontrol);
 }
 
 // These commands scroll the display without changing the RAM
-void LiquidCrystal::scrollDisplayLeft(void) {
+void TT_LiquidCrystal::scrollDisplayLeft(void) {
   command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVELEFT);
 }
-void LiquidCrystal::scrollDisplayRight(void) {
+void TT_LiquidCrystal::scrollDisplayRight(void) {
   command(LCD_CURSORSHIFT | LCD_DISPLAYMOVE | LCD_MOVERIGHT);
 }
 
 // This is for text that flows Left to Right
-void LiquidCrystal::leftToRight(void) {
+void TT_LiquidCrystal::leftToRight(void) {
   _displaymode |= LCD_ENTRYLEFT;
   command(LCD_ENTRYMODESET | _displaymode);
 }
 
 // This is for text that flows Right to Left
-void LiquidCrystal::rightToLeft(void) {
+void TT_LiquidCrystal::rightToLeft(void) {
   _displaymode &= ~LCD_ENTRYLEFT;
   command(LCD_ENTRYMODESET | _displaymode);
 }
 
 // This will 'right justify' text from the cursor
-void LiquidCrystal::autoscroll(void) {
+void TT_LiquidCrystal::autoscroll(void) {
   _displaymode |= LCD_ENTRYSHIFTINCREMENT;
   command(LCD_ENTRYMODESET | _displaymode);
 }
 
 // This will 'left justify' text from the cursor
-void LiquidCrystal::noAutoscroll(void) {
+void TT_LiquidCrystal::noAutoscroll(void) {
   _displaymode &= ~LCD_ENTRYSHIFTINCREMENT;
   command(LCD_ENTRYMODESET | _displaymode);
 }
 
 // Allows us to fill the first 8 CGRAM locations
 // with custom characters
-void LiquidCrystal::createChar(uint8_t location, uint8_t charmap[]) {
+void TT_LiquidCrystal::createChar(uint8_t location, uint8_t charmap[]) {
   location &= 0x7; // we only have 8 locations 0-7
   command(LCD_SETCGRAMADDR | (location << 3));
   for (int i=0; i<8; i++) {
@@ -443,11 +443,11 @@ void LiquidCrystal::createChar(uint8_t location, uint8_t charmap[]) {
 
 /*********** mid level commands, for sending data/cmds */
 
-inline void LiquidCrystal::command(uint8_t value) {
+inline void TT_LiquidCrystal::command(uint8_t value) {
   send(value, LOW);
 }
 
-inline size_t LiquidCrystal::write(uint8_t value) {
+inline size_t TT_LiquidCrystal::write(uint8_t value) {
   send(value, HIGH);
   return 1; // assume sucess
 }
@@ -455,7 +455,7 @@ inline size_t LiquidCrystal::write(uint8_t value) {
 /************ low level data pushing commands **********/
 
 // write either command or data, with automatic 4/8-bit selection
-void LiquidCrystal::send(uint8_t value, uint8_t mode) {
+void TT_LiquidCrystal::send(uint8_t value, uint8_t mode) {
   digitalWrite(_rs_pin, mode);
 
   // if there is a RW pin indicated, set it low to Write
@@ -471,7 +471,7 @@ void LiquidCrystal::send(uint8_t value, uint8_t mode) {
   }
 }
 
-void LiquidCrystal::pulseEnable(void) {
+void TT_LiquidCrystal::pulseEnable(void) {
   digitalWrite(_enable_pin, LOW);
   delayMicroseconds(1);
   digitalWrite(_enable_pin, HIGH);
@@ -480,7 +480,7 @@ void LiquidCrystal::pulseEnable(void) {
   delayMicroseconds(100);   // commands need > 37us to settle
 }
 
-void LiquidCrystal::write4bits(uint8_t value) {
+void TT_LiquidCrystal::write4bits(uint8_t value) {
   for (int i = 0; i < 4; i++) {
     digitalWrite(_data_pins[i], (value >> i) & 0x01);
   }
@@ -488,7 +488,7 @@ void LiquidCrystal::write4bits(uint8_t value) {
   pulseEnable();
 }
 
-void LiquidCrystal::write8bits(uint8_t value) {
+void TT_LiquidCrystal::write8bits(uint8_t value) {
   for (int i = 0; i < 8; i++) {
     digitalWrite(_data_pins[i], (value >> i) & 0x01);
   }
